@@ -56,8 +56,6 @@ with open(filename, 'r') as file:
 
   #Use the airport list to filter for the data only airport
   filtered_lines_airport = [line for line in file if line[6:10] in airport_list_data]
-  #Filter only A|G|I|M data
-  #filtered_lines_airport = [line for line in filtered_lines_airport if line[12:13] == 'A' or line[12:13] == 'G' or line[12:13] == 'I' or line[12:13] == 'M']
   #Filter only A|G|I|M|VATI data
   filtered_lines_airport = [line for line in filtered_lines_airport if line[12:13] == 'A' or line[12:13] == 'G' or line[12:13] == 'I' or line[12:13] == 'M' or line[12:16] == 'VATI']
   #Replace 8.33kHz to 25kHz frequency on ATIS - If character 22 is a 3 it become a 2 and so on
