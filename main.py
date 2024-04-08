@@ -16,6 +16,9 @@ filename = sorted(filename)
 #Selecting the last one
 filename = filename[-1]
 
+#Get the AIRAC cycle of the filename
+AIRACcycle = filename[10:14]
+
 
 #Opening of the ARINC file
 with open(filename, 'r') as file:
@@ -71,7 +74,7 @@ with open(filename, 'r') as file:
   #Output
   if filtered_lines_radnav:
       #Writing of the list in the file
-      with open('export.txt', 'w') as output_file:
+      with open('export_' + AIRACcycle + '.txt', 'w') as output_file:
           #Addition of the header
           output_file.write(header_content)
           #Addition of the radnav data
@@ -82,11 +85,10 @@ with open(filename, 'r') as file:
           print(f"Number of airport lines exported : {len(filtered_lines_airport)}")
           #Addition of the footer
           output_file.write(footer_content)
-          #print("--- %s seconds ---" % (time.time() - start_time))
       # Counting the number of lines in the export.txt file
-      with open('export.txt', 'r') as export_file:
+      with open('export_' + AIRACcycle + '.txt', 'r') as export_file:
           num_lines = sum(1 for line in export_file)
-          print(f"Number of lines in export.txt: {num_lines}")
+          print(f"Number of lines in export" + AIRACcycle + ".txt: {num_lines}")
           print("All files have been generated in %s seconds, you may now close the script." % (time.time() - start_time))
 
   else:
