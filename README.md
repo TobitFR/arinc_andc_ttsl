@@ -11,10 +11,10 @@ This Python script converts the ARINC 424 world file (assuming it follows the sc
 
 ## Features
 
-- Airport selection (using airport_list.txt)
-- Country VOR, DME & NDB selection (country_list.txt)
-- Automatic conversion of 8.33kHz ATIS frequency to 25kHz compliant frequency (V1.1)
-- Possibility to add a footer, to add manually add line to exported file (such as RWY36 for EDDF)
+- Airport selection (using airport_list.txt).
+- Country VOR, DME & NDB selection (country_list.txt).
+- Automatic conversion of 8.33kHz ATIS frequency to 25kHz compliant frequency (V1.1).
+- Possibility to add a footer, to add manually add line to exported file (such as RWY36 for EDDF).
 - A script timer to show to ARE how VB is obsolete ;)
 
 ## How to use
@@ -23,11 +23,14 @@ This Python script converts the ARINC 424 world file (assuming it follows the sc
 - Place the simaero_XXXX.pc file in the folder.
 - Check that both airports_list.txt and country_list.txt are up to date with your need.
 - Execute the main.py file.
-- A new file named export.txt containing only the airports set on airport_list.txt, VOR, DME & NDB set on country_list.txt and footer if used will be created.
+- A new file named export_XXXX.txt containing only the airports set on airport_list.txt, VOR, DME & NDB set on country_list.txt and footer if used will be created.
+  
 ## Changelog
+
 Version 1.1
-- Addition of automatic conversion of 8.33kHz ATIS frequency to 25kHz compliant frequency
+- Addition of automatic conversion of 8.33kHz ATIS frequency to 25kHz compliant frequency.
 - Removed the need of renaming the filename from "simaero_XXXX.pc" to "simaero.pc". The script automatically take the latest file with ".pc" extension. Be carefull to not leave the older files - just in case ;)
+- Addition of the AIRAC cycle on the export filename.
 
 Version 1.0
 - Initial Release
