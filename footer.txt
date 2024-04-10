@@ -1,3 +1,2 @@
-#In this file put all the lines that needs to be added afterwards, such as RWY36 at EDDF. - Leave the first line as it is !
 SEURP EDDFEDGRW36    1131231770 N49595460E008313470               00325000050148      0000                                 151992307
 SEURP EDDFEDGRW36    2S                            35963Y        L00325                                                    152002307
