@@ -1,4 +1,4 @@
-#Com
+#In this file put all the airport that are needed. - Leave the first line as it is !
 BGSF
 BIKF
 CYHZ
