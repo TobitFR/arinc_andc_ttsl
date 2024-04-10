@@ -1,10 +1,10 @@
-#Made by TSK on April 8th 2024
-#Version 1.1 - Developped on https://replit.com/@sinackt/ANDC#main.py
+#Made by TSK on April 10th 2024
+#Version 1.2 - Developped on https://replit.com/@sinackt/ARINC-ANDC-Convertor#main.py
 #Python 3.12.2
 
 #Libraries
-import time
-import glob
+import time #Used for the compilation timing
+import glob #Used to filter the AIRAC file to get last AIRAC file
 
 #Start of time to beat ARE
 start_time = time.time()
@@ -38,13 +38,18 @@ with open(filename, 'r') as file:
       #Do not take in account the first column
       country_list_data = country_list_data[1:]
       print('Country list reading...')
-      #print(country_list_data)
+      print(country_list_data)
       print(f"Number of country : {len(country_list_data)}")
 
-  #Use the country list to filter for the data only country
-  filtered_lines_radnav = [line for line in file if line[19:21] in country_list_data]
-  #Filtering the data the VOR, DME and NDB
-  filtered_lines_radnav = [line for line in filtered_lines_radnav if line[4:5] == 'D' or line[4:6] == 'DB']
+      #If the country_list_data contains "ALL" then show all the VOR DME NDB of all the world
+      if "ALL" in country_list_data:
+        print('Export ALL countries VOR DME NDB')
+        filtered_lines_radnav = [line for line in file if line[4:5] == 'D' or line[4:6] == 'DB']
+      else:
+        #Use the country list to filter for the data only country
+        filtered_lines_radnav = [line for line in file if line[19:21] in country_list_data]
+        #Filtering the data the VOR, DME and NDB
+        filtered_lines_radnav = [line for line in filtered_lines_radnav if line[4:5] == 'D' or line[4:6] == 'DB']
 
 #Reopening of the ARINC, because without it won't work and I don't know why :(  
 with open(filename, 'r') as file:
@@ -69,7 +74,7 @@ with open(filename, 'r') as file:
   filtered_lines_airport = [line[:22] + '7' + line[23:] if line[22] == '8' else line for line in filtered_lines_airport] #XXX.X80 -> XXX.X75
   filtered_lines_airport = [line[:22] + '7' + line[23:] if line[22] == '9' else line for line in filtered_lines_airport] #XXX.X90 -> XXX.X75
   print('ATIS 8.33kHz to 25kHz conversion...')
-  
+
 
   #Output
   if filtered_lines_radnav:
@@ -88,7 +93,8 @@ with open(filename, 'r') as file:
       # Counting the number of lines in the export.txt file
       with open('export_' + AIRACcycle + '.txt', 'r') as export_file:
           num_lines = sum(1 for line in export_file)
-          print(f"Number of lines in export" + AIRACcycle + ".txt: {num_lines}")
+          print('Number of lines in export_' + AIRACcycle + '.txt: ', end='')
+          print(num_lines)
           print("All files have been generated in %s seconds, you may now close the script." % (time.time() - start_time))
 
   else:
