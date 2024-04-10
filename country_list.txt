@@ -1,4 +1,4 @@
-#In this file put all the country where all VOR, DME and NDB will be exported. If ALL is put, then it will set VOR DME NDB for the whole world.
+#In this file put all the country where all VOR, DME and NDB will be exported. If ALL is put, then it will set VOR DME NDB for the whole world. - Leave the first line as it is !
 BG
 BI
 CY
