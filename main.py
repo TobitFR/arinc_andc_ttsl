@@ -10,7 +10,7 @@ import glob  #Used to filter the AIRAC file to get last AIRAC file
 start_time = time.time()
 
 #Get all the files with a ".pc" extension
-filename = glob.glob('./*.pc')  #[-1]
+filename = glob.glob('./*.pc')
 #Sorting filename to get the latest ARINC file
 filename = sorted(filename)
 #Selecting the last one
@@ -23,8 +23,7 @@ AIRACcycle = filename[10:14]
 with open(filename, 'r') as file:
   print('Reading of ' + filename + ' file...')
   #Reading of the 4 first row of simaero.pc and making it the header
-  header_content = file.readline() + file.readline() + file.readline(
-  ) + file.readline()
+  header_content = file.readline() + file.readline() + file.readline() + file.readline()
   print('Reading and conversion of header...')
 
   #Reading of the footer
@@ -41,31 +40,19 @@ with open(filename, 'r') as file:
     country_list_data = country_list_data[1:]
 
     #Filtering for USA airports
-    country_list_data_USA = [
-        line for line in country_list_data if line.startswith('K')
-    ]
+    country_list_data_USA = [line for line in country_list_data if line.startswith('K')]
     #Filter USA airports only if they are in the list
     if len(country_list_data_USA) != 0:
       print('USA airport(s) detected, proceeding to auto filtering')
       #Removing the wrong USA airport from country list
-      country_list_data = [
-          line for line in country_list_data
-          if line not in country_list_data_USA
-      ]
+      country_list_data = [line for line in country_list_data if line not in country_list_data_USA]
       #Search of USA's airport local ICAO code
       USA_country_list_data = ['K0', 'K1', 'K2', 'K3', 'K4', 'K5', 'K6', 'K7']
       #All lines containing K1/2... as country code
-      filtered_lines_USA_airports = [
-          line for line in file if line[10:12] in USA_country_list_data
-      ]
+      filtered_lines_USA_airports = [line for line in file if line[10:12] in USA_country_list_data]
       #All lines containing wanted USA airport
-      filtered_lines_USA_airports = [
-          line for line in filtered_lines_USA_airports
-          if any(code in line[6:10] for code in country_list_data_USA)
-      ]
-      filtered_lines_USA_airports = [
-          line[10:12] for line in filtered_lines_USA_airports
-      ]
+      filtered_lines_USA_airports = [line for line in filtered_lines_USA_airports if any(code in line[6:10] for code in country_list_data_USA)]
+      filtered_lines_USA_airports = [line[10:12] for line in filtered_lines_USA_airports]
       #Filter to remove duplicates
       filtered_lines_USA_airports = list(set(filtered_lines_USA_airports))
     #Take only the first 2 characters
@@ -86,20 +73,13 @@ with open(filename, 'r') as file:
 
       #If the country_list_data contains "ALL" then show all the VOR DME NDB of all the world
       if "ALL" in country_list_data:
-        filtered_lines_radnav = [
-            line for line in file if line[4:5] == 'D' or line[4:6] == 'DB'
-        ]
+        filtered_lines_radnav = [line for line in file if line[4:5] == 'D' or line[4:6] == 'DB']
         print('Export ALL countries VOR DME NDB')
       else:
         #Use the country list to filter for the data only country
-        filtered_lines_radnav = [
-            line for line in file if line[19:21] in country_list_data
-        ]
+        filtered_lines_radnav = [line for line in file if line[19:21] in country_list_data]
         #Filtering the data the VOR, DME and NDB
-        filtered_lines_radnav = [
-            line for line in filtered_lines_radnav
-            if line[4:5] == 'D' or line[4:6] == 'DB'
-        ]
+        filtered_lines_radnav = [line for line in filtered_lines_radnav if line[4:5] == 'D' or line[4:6] == 'DB']
 
 #------------------------------------------------------------------------------------------
 
@@ -117,40 +97,16 @@ with open(filename, 'r') as file:
     print(f"Number of airport : {len(airport_list_data)}")
 
   #Use the airport list to filter for the data only airport
-  filtered_lines_airport = [
-      line for line in file if line[6:10] in airport_list_data
-  ]
+  filtered_lines_airport = [line for line in file if line[6:10] in airport_list_data]
   #Filter only A|G|I|M|VATI data
-  filtered_lines_airport = [
-      line for line in filtered_lines_airport
-      if line[12:13] == 'A' or line[12:13] == 'G' or line[12:13] == 'I'
-      or line[12:13] == 'M' or line[12:16] == 'VATI'
-  ]
+  filtered_lines_airport = [line for line in filtered_lines_airport if line[12:13] == 'A' or line[12:13] == 'G' or line[12:13] == 'I' or line[12:13] == 'M' or line[12:16] == 'VATI']
   #Replace 8.33kHz to 25kHz frequency on ATIS - If character 22 is a 1 it become a 0 and so on
-  filtered_lines_airport = [
-      line[:22] + '0' + line[23:] if line[22] == '1' else line
-      for line in filtered_lines_airport
-  ]  #XXX.X10 -> XXX.X00
-  filtered_lines_airport = [
-      line[:22] + '2' + line[23:] if line[22] == '3' else line
-      for line in filtered_lines_airport
-  ]  #XXX.X30 -> XXX.X25
-  filtered_lines_airport = [
-      line[:22] + '5' + line[23:] if line[22] == '4' else line
-      for line in filtered_lines_airport
-  ]  #XXX.X40 -> XXX.X50
-  filtered_lines_airport = [
-      line[:22] + '5' + line[23:] if line[22] == '6' else line
-      for line in filtered_lines_airport
-  ]  #XXX.X60 -> XXX.X50
-  filtered_lines_airport = [
-      line[:22] + '7' + line[23:] if line[22] == '8' else line
-      for line in filtered_lines_airport
-  ]  #XXX.X80 -> XXX.X75
-  filtered_lines_airport = [
-      line[:22] + '7' + line[23:] if line[22] == '9' else line
-      for line in filtered_lines_airport
-  ]  #XXX.X90 -> XXX.X75
+  filtered_lines_airport = [line[:22] + '0' + line[23:] if line[22] == '1' else line for line in filtered_lines_airport]  #XXX.X10 -> XXX.X00
+  filtered_lines_airport = [line[:22] + '2' + line[23:] if line[22] == '3' else line for line in filtered_lines_airport]  #XXX.X30 -> XXX.X25
+  filtered_lines_airport = [line[:22] + '5' + line[23:] if line[22] == '4' else line for line in filtered_lines_airport]  #XXX.X40 -> XXX.X50
+  filtered_lines_airport = [line[:22] + '5' + line[23:] if line[22] == '6' else line for line in filtered_lines_airport]  #XXX.X60 -> XXX.X50
+  filtered_lines_airport = [line[:22] + '7' + line[23:] if line[22] == '8' else line for line in filtered_lines_airport]  #XXX.X80 -> XXX.X75
+  filtered_lines_airport = [line[:22] + '7' + line[23:] if line[22] == '9' else line for line in filtered_lines_airport]  #XXX.X90 -> XXX.X75
   print('ATIS 8.33kHz to 25kHz conversion...')
 
   #------------------------------------------------------------------------------------------
@@ -171,7 +127,7 @@ with open(filename, 'r') as file:
           f"Number of airport lines exported : {len(filtered_lines_airport)}")
       #Addition of the footer
       output_file.write(footer_content)
-    # Counting the number of lines in the export.txt file
+    #Counting the number of lines in the export.txt file
     with open('export_' + AIRACcycle + '.txt', 'r') as export_file:
       num_lines = sum(1 for line in export_file)
       print('Number of lines in export_' + AIRACcycle + '.txt: ', end='')
