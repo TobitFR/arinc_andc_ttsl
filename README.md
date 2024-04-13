@@ -21,11 +21,14 @@ This Python script converts the ARINC 424 world file (assuming it follows the sc
 
 - Install Python version 3+ if not already installed. (3.8 maximum for Windows 7)
 - Place the simaero_XXXX.pc file in the folder.
-- Check that both airports_list.txt and country_list.txt are up to date with your need.
+- Check that both airports_list.txt are up to date with your need.
 - Execute the main.py file.
-- A new file named export_XXXX.txt containing only the airports set on airport_list.txt, VOR, DME & NDB set on country_list.txt and footer if used will be created.
+- A new file named export_XXXX.txt containing only the airports set on airport_list.txt, VOR, DME & NDB will be added for the whole country based on the aiports countries (the whole country is added of the is an airport set for the country) and footer if used, will be created.
   
 ## Changelog
+Version 1.3 (Aptril 13th 2024)
+ - Removal of the country_list.txt, country_list will be created using the airports ICAO, if there is USA airport, the ICAO will be converted to the right KX.
+
 Version 1.2 (April 10th 2024)
 - Addition of possibility of taking the whole world for the VOR DME NDB part.
 
