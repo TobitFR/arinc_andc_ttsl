@@ -1,5 +1,5 @@
-#Made by TSK on April 13th 2024
-#Version 1.3 - Developped on https://replit.com/@sinackt/ARINC-ANDC-Convertor#main.py
+#Made by TSK on April 15th 2024
+#Version 1.4 - Developped on https://replit.com/@sinackt/ARINC-ANDC-Convertor#main.py
 #Python 3.12.2
 
 #Libraries
@@ -31,9 +31,9 @@ with open(filename, 'r') as file:
     footer_content = footer_file.read()
     print('Reading of footer.txt file...')
 
-#------------------------------------------------------------------------------------------
+  #------------------------------------------------------------------------------------------
 
-#Reading of the country_list.txt file
+  #Reading of the country_list.txt file
   with open('airport_list.txt', 'r') as country_list_file:
     country_list_data = country_list_file.read().splitlines()
     #Do not take in account the first row
@@ -101,12 +101,12 @@ with open(filename, 'r') as file:
   #Filter only A|G|I|M|VATI data
   filtered_lines_airport = [line for line in filtered_lines_airport if line[12:13] == 'A' or line[12:13] == 'G' or line[12:13] == 'I' or line[12:13] == 'M' or line[12:16] == 'VATI']
   #Replace 8.33kHz to 25kHz frequency on ATIS - If character 22 is a 1 it become a 0 and so on
-  filtered_lines_airport = [line[:22] + '0' + line[23:] if line[22] == '1' else line for line in filtered_lines_airport]  #XXX.X10 -> XXX.X00
-  filtered_lines_airport = [line[:22] + '2' + line[23:] if line[22] == '3' else line for line in filtered_lines_airport]  #XXX.X30 -> XXX.X25
-  filtered_lines_airport = [line[:22] + '5' + line[23:] if line[22] == '4' else line for line in filtered_lines_airport]  #XXX.X40 -> XXX.X50
-  filtered_lines_airport = [line[:22] + '5' + line[23:] if line[22] == '6' else line for line in filtered_lines_airport]  #XXX.X60 -> XXX.X50
-  filtered_lines_airport = [line[:22] + '7' + line[23:] if line[22] == '8' else line for line in filtered_lines_airport]  #XXX.X80 -> XXX.X75
-  filtered_lines_airport = [line[:22] + '7' + line[23:] if line[22] == '9' else line for line in filtered_lines_airport]  #XXX.X90 -> XXX.X75
+  filtered_lines_airport = [line[:22] + '0' + line[23:] if line[22] == '1' and line[12:16] == 'VATI' else line for line in filtered_lines_airport]  #XXX.X10 -> XXX.X00
+  filtered_lines_airport = [line[:22] + '2' + line[23:] if line[22] == '3' and line[12:16] == 'VATI' else line for line in filtered_lines_airport]  #XXX.X30 -> XXX.X25
+  filtered_lines_airport = [line[:22] + '5' + line[23:] if line[22] == '4' and line[12:16] == 'VATI' else line for line in filtered_lines_airport]  #XXX.X40 -> XXX.X50
+  filtered_lines_airport = [line[:22] + '5' + line[23:] if line[22] == '6' and line[12:16] == 'VATI' else line for line in filtered_lines_airport]  #XXX.X60 -> XXX.X50
+  filtered_lines_airport = [line[:22] + '7' + line[23:] if line[22] == '8' and line[12:16] == 'VATI' else line for line in filtered_lines_airport]  #XXX.X80 -> XXX.X75
+  filtered_lines_airport = [line[:22] + '7' + line[23:] if line[22] == '9' and line[12:16] == 'VATI' else line for line in filtered_lines_airport]  #XXX.X90 -> XXX.X75
   print('ATIS 8.33kHz to 25kHz conversion...')
 
   #------------------------------------------------------------------------------------------
