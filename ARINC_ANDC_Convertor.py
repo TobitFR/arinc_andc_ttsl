@@ -1,5 +1,5 @@
 # Made by TSK on May 28th 2024
-# Version 1.7 - Developped on https://replit.com/@sinackt/ARINC-ANDC-Convertor#main.py
+# Version 1.6.2 - Developped on https://replit.com/@sinackt/ARINC-ANDC-Convertor#main.py
 # Python 3.12.2
 
 import time  # Used for the compilation timing
@@ -36,7 +36,7 @@ second_file_list_column = [
 
 # For now will only show the print log
 text_viewer_column = [
-    [sg.Text("Print Log")],
+    [sg.Text("Compilation log")],
     [sg.Multiline(size=(60, 20), key="-LOG-", autoscroll=True, reroute_stdout=True, reroute_stderr=True)],
     [sg.Checkbox('ATIS 8.33kHz -> 25kHz Conversion', default=True, key="-ATIS-")],
 ]
@@ -98,6 +98,12 @@ while True:
 
     elif event == "-FILE LIST2-":  # A file was chosen from the listbox
         try:
+            #Verifing that the AIRAC file has been defined
+            try:
+                fnames
+            except NameError:
+                sg.popup_auto_close("No AIRAC File Selected")
+
             # Start of time to beat ARE
             start_time = time.time()
 
@@ -186,7 +192,9 @@ while True:
                 with open(output_filename, 'r') as export_file:
                     num_lines = sum(1 for line in export_file)
                     print(f'Number of lines in {output_filename}: {num_lines}')
-                    print(f"All files have been generated in {time.time() - start_time} seconds, you may now close the script.")
+                    #print(f"All files have been generated in {time.time() - start_time} seconds, you may now close the script.")
+                    #sg.popup_auto_close(f"All files have been generated in {time.time() - start_time} seconds, you may now close the script.")
+                    ch = sg.popup_auto_close(f"All files have been generated in {time.time() - start_time} seconds, you may now close the script.","Press OK to proceed",  title="AIRAC Convertor - TSK", keep_on_top=True)
             else:
                 print("Error in filtering the lines")
                 print(f"--- {time.time() - start_time} seconds ---")
