@@ -33,7 +33,7 @@ This Python script converts the ARINC 424 world file (assuming it follows the sc
 ## Changelog
 
 Version 1.7 (May 28th 2024)
- - Various optimizations, mainly simaero_XXXX.pc is now opened once instead of three times. (Thanks to GPT-4o)
+ - Various optimizations, mainly simaero_XXXX.pc is now opened once instead of three times. Execution for A330-340, v1.6 : 1,68s -> v1.7 : 1,38s. (Thanks to GPT-4o)
 
 Version 1.6 (May 28th 2024)
  - Addition of Graphical User Interface using PySimpleGUI.
