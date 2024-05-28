@@ -32,7 +32,11 @@ This Python script converts the ARINC 424 world file (assuming it follows the sc
   
 ## Changelog
 
-Version 1.7 (May 28th 2024)
+Version 1.6.2 (May 28th 2024)
+ - Addition of a pop-up at the end the compilation.
+ - Addition of a warning pop-up in case the AIRAC file was not selected.
+
+Version 1.6.1 (May 28th 2024)
  - Various optimizations, mainly simaero_XXXX.pc is now opened once instead of three times. Execution for A330-340, v1.6 : 1,68s -> v1.7 : 1,38s. (Thanks to GPT-4o)
 
 Version 1.6 (May 28th 2024)
