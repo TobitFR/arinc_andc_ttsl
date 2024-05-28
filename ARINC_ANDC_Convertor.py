@@ -39,7 +39,7 @@ second_file_list_column = [
 text_viewer_column = [
     [sg.Text("Print Log")],
     [sg.Multiline(size=(60, 20), key="-LOG-", autoscroll=True, reroute_stdout=True, reroute_stderr=True)],
-    [sg.Checkbox('Modif ATIS', default=True, key="-ATIS-")],
+    [sg.Checkbox('ATIS 8.33kHz -> 25kHz Conversion', default=True, key="-ATIS-")],
 ]
 
 # ----- Full layout -----
@@ -222,8 +222,8 @@ while True:
 
                 # Output
                 if filtered_lines_airport:
-                    # Writing of the list in the file
-                    with open('export_' + AIRACcycle + '.txt', 'w') as output_file:
+                    # Writing of the list in the file, the file is exported to the simaero_XXXX.pc folder
+                    with open(os.path.join( folder,'export_' + AIRACcycle + '.txt'), 'w') as output_file:
                         # Addition of the header
                         output_file.write(header_content)
                         # Addition of the radnav data
@@ -237,7 +237,7 @@ while True:
                         # Addition of the footer
                         output_file.write(footer_content)
                         # Counting the number of lines in the export.txt file
-                    with open('export_' + AIRACcycle + '.txt', 'r') as export_file:
+                    with open(os.path.join( folder,'export_' + AIRACcycle + '.txt'), 'r') as export_file:
                         num_lines = sum(1 for line in export_file)
                         print('Number of lines in export_' + AIRACcycle + '.txt: ', end='')
                         print(num_lines)
