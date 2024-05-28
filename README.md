@@ -28,7 +28,7 @@ This Python script converts the ARINC 424 world file (assuming it follows the sc
 - On "Airport List Folder" select the folder containing the airport_list.txt file.
 - Select the desired ".txt" file, the software will disregard the first line, for the next line only put one ICAO per line.
 - Once the ".txt" file is selected, the software will compile data. The compilation log is shown on the right column.
-- The compiled file is exporte in the "AIRAC File Folder".
+- The compiled file is exported in the "AIRAC File Folder".
   
 ## Changelog
 
