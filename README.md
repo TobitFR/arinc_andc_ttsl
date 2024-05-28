@@ -12,25 +12,40 @@ This Python script converts the ARINC 424 world file (assuming it follows the sc
 ## Features
 
 - Airport selection (using airport_list.txt).
-- Country VOR, DME & NDB selection (country_list.txt).
-- Automatic conversion of 8.33kHz ATIS frequency to 25kHz compliant frequency (V1.1).
+- Automatic country VOR, DME & NDB selection using the airport selection (V1.3).
+- Automatic conversion of 8.33kHz ATIS frequency to 25kHz compliant frequency (V1.1), possibility to disable this function (V1.6).
+- Automatic conversion of American ICAO to the right region code, ie KLAX -> K2 (V1.3).
+- A nice graphical user interface using PySimpleGUI (V1.6).
 - Possibility to add a footer, to add manually add line to exported file (such as RWY36 for EDDF).
 - A script timer to show to ARE how VB is obsolete ;)
 
 ## How to use
 
-- Install Python version 3+ if not already installed. (3.8 maximum for Windows 7)
-- Place the simaero_XXXX.pc file in the folder.
-- Check that both airports_list.txt are up to date with your need.
-- Execute the main.py file.
-- A new file named export_XXXX.txt containing only the airports set on airport_list.txt, VOR, DME & NDB will be added for the whole country based on the aiports countries (the whole country is added of the is an airport set for the country) and footer if used, will be created.
+- Execute the ARINC_ANDC_Convertor.exe.
+- On "AIRAC File Folder" select the folder containing the simaero_XXXX.pc file.
+- Select the desired "simaero_XXXX.pc" file.
+- Check or uncheck the "ATIS 8.33kHz -> 25kHz Conversion" depending of the simulator.
+- On "Airport List Folder" select the folder containing the airport_list.txt file.
+- Select the desired ".txt" file, the software will disregard the first line, for the next line only put one ICAO per line.
+- Once the ".txt" file is selected, the software will compile data. The compilation log is shown on the right column.
+- The compiled file is exporte in the "AIRAC File Folder".
   
 ## Changelog
+
+Version 1.6 (May 28th 2024)
+ - Addition of Graphical User Interface using PySimpleGUI.
+ - Addition of a checkbox enabling or disabling the ATIS 25kHz conversion.
+ - Removal of the need to put all the files in the same folder.
+ - Removal of the footer.txt, now incorporated in the code - this might change.
+
+Version 1.5 (XX XX 2024)
+ - Various fix
+
 Version 1.4 (April 15th 2024)
  - HotFix : ATIS function was modifying all 22th caracters regardless if it's ATIS or not causing VHF frequency to become unusable (009.90 io 109.90)
 
 Version 1.3 (April 13th 2024)
- - Removal of the country_list.txt, country_list will be created using the airports ICAO, if there is USA airport, the ICAO will be converted to the right KX.
+ - Removal of the country_list.txt, country_list will be created using the airports ICAO (if at least one airport on a counrty is selected the whole country VOR/DME/NDB will be added), if there is an american airport, the ICAO will be converted to the right region code (ie KX).
 
 Version 1.2 (April 10th 2024)
 - Addition of possibility of taking the whole world for the VOR DME NDB part.
