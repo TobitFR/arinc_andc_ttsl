@@ -32,6 +32,12 @@ This Python script converts the ARINC 424 world file (assuming it follows the sc
   
 ## Changelog
 
+Version 1.7 (May 29th 2024)
+ - UI modification : 3 columns to 2 columns.
+ - Previously using "FolderBrowser", now using "FileBrowser".
+ - Addition of a "compile" button, previously compilation was started as soon as an airport_list.txt file was selected.
+ - Addition of a "cancel" button, used to close the window.
+
 Version 1.6.2 (May 28th 2024)
  - Addition of a pop-up at the end the compilation.
  - Addition of a warning pop-up in case the AIRAC file was not selected.
