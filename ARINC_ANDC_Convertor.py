@@ -152,7 +152,7 @@ def compile_files():
 
 # Creating the Tkinter window
 root = tk.Tk()
-root.title("AIRAC Convertor - TSK x GPT - v1.9")
+root.title("NAV-SOFT - TSK x GPT - v1.9.1")
 root.configure(bg='#f0f0f0')  # Light gray background
 
 # Style configuration
@@ -175,7 +175,7 @@ frame_left = tk.Frame(frame_main, bg='#f0f0f0', relief='groove', borderwidth=2)
 frame_left.grid(row=0, column=0, padx=10, pady=10, sticky="nsew")
 
 # Title
-title_label = tk.Label(frame_left, text="AIRAC Data Converter", font=('Arial', 14, 'bold'), bg='#f0f0f0', fg='#2c3e50')
+title_label = tk.Label(frame_left, text="NAV-SOFT : Navigation Sorting and Filtering Tool", font=('Arial', 14, 'bold'), bg='#f0f0f0', fg='#2c3e50')
 title_label.grid(row=0, column=0, columnspan=3, pady=(10,20), sticky='ew')
 
 # File selection section
