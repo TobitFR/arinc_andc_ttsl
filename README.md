@@ -22,15 +22,19 @@ This Python script converts the ARINC 424 world file (assuming it follows the sc
 ## How to use
 
 - Execute the ARINC_ANDC_Convertor.exe.
-- On "AIRAC File Folder" select the folder containing the simaero_XXXX.pc file.
-- Select the desired "simaero_XXXX.pc" file.
-- Check or uncheck the "ATIS 8.33kHz -> 25kHz Conversion" depending of the simulator.
-- On "Airport List Folder" select the folder containing the airport_list.txt file.
-- Select the desired ".txt" file, the software will disregard the first line, for the next line only put one ICAO per line.
-- Once the ".txt" file is selected, the software will compile data. The compilation log is shown on the right column.
-- The compiled file is exported in the "AIRAC File Folder".
+- On "AIRAC File" select the AIRAC 424-9 file.
+- On "Airport List" select the airport_list.txt file, all airports retrieved will be displayed.
+- Check or uncheck the "ATIS 8.33kHz -> 25kHz Conversion" depending on the simulator.
+- Click on "Compile" to compile, a compilation log will show the progress.
+- One the compilation is finished a pop-up will show up, the exported file will appear on the AIRAC file folder.
   
 ## Changelog
+
+Version 1.9.1 (March 1st 2025)
+ - Renamed : "NAV-SOFT : Navigation Sorting and Filtering Tool"
+ - Removal of archives folder
+ - Addition of the ICON
+ - Addition of exe generation configuration JSON file
 
 Version 1.9 (March 1st 2025)
  - GUI remade cleaner and prettier

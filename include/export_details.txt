@@ -1,0 +1,29 @@
+# UTF-8 Encoded Version Information Resource
+VSVersionInfo(
+  ffi=FixedFileInfo(
+    filevers=(1, 0, 0, 0),
+    prodvers=(1, 0, 0, 0),
+    mask=0x3f,
+    flags=0x0,
+    OS=0x40004,
+    fileType=0x1,
+    subtype=0x0,
+    date=(0, 0)
+  ),
+  kids=[
+    StringFileInfo([
+      StringTable(
+        u'040904b0', [
+          StringStruct(u'CompanyName', u'Ma Société'),
+          StringStruct(u'FileDescription', u'AIRAC 424-9 Navigation Data Filtering and Sorting Tool'),
+          StringStruct(u'FileVersion', u'1.9.1'),
+          StringStruct(u'InternalName', u'NAV-SOFT'),
+          StringStruct(u'LegalCopyright', u'© 2025 TSK'),
+          StringStruct(u'OriginalFilename', u'nav-soft.exe'),
+          StringStruct(u'ProductName', u'NAV-SOFT : Navigation Sorting and Filtering Tool'),
+          StringStruct(u'ProductVersion', u'1.9.1')
+        ])
+    ]),
+    VarFileInfo([VarStruct(u'Translation', [0x0409, 1200])])
+  ]
+)
