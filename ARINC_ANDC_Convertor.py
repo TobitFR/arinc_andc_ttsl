@@ -5,8 +5,9 @@
 
 import time  # Used for the compilation timing
 import os
-from tkinter import *
+import tkinter as tk
 from tkinter import filedialog, messagebox, ttk
+from tkinter.constants import END  # Add explicit import of END constant
 
 # Function to read the entire file content once
 def read_file_content(filename):
@@ -56,10 +57,10 @@ def browse_airport_file():
         formatted_lines = []
         for i in range(0, len(sorted_airports), 10):
             line_airports = sorted_airports[i:i+10]
-            # Center each line by adding appropriate padding
+            # Calculate padding for centering
             line_text = ' '.join(f"{airport:<4}" for airport in line_airports)
-            padding = ' ' * ((49 - len(line_text)) // 2)  # Calculate padding for centering
-            formatted_lines.append(padding + line_text)
+            padding = (49 - len(line_text)) // 2
+            formatted_lines.append(' ' * padding + line_text)
         airport_list_text.insert(END, '\n'.join(formatted_lines))
         log_text.insert(END, f"Loaded {len(airports)} airports\n")
 
@@ -150,7 +151,7 @@ def compile_files():
         messagebox.showwarning("Input Error", "You need to choose both files!")
 
 # Creating the Tkinter window
-root = Tk()
+root = tk.Tk()
 root.title("AIRAC Convertor - TSK x GPT - v1.9")
 root.configure(bg='#f0f0f0')  # Light gray background
 
@@ -160,71 +161,70 @@ style.configure('TButton', padding=5)
 style.configure('TLabel', padding=2)
 
 # Variables
-airac_file_path = StringVar()
-airport_file_path = StringVar()
-atis_var = BooleanVar(value=True)
-airac_cycle_var = StringVar()
+airac_file_path = tk.StringVar()
+airport_file_path = tk.StringVar()
+atis_var = tk.BooleanVar(value=True)
+airac_cycle_var = tk.StringVar()
 
 # Main Layout Frame
-frame_main = Frame(root, bg='#f0f0f0')
+frame_main = tk.Frame(root, bg='#f0f0f0')
 frame_main.pack(padx=20, pady=20, fill='both', expand=True)
 
 # Left frame for file inputs and buttons
-frame_left = Frame(frame_main, bg='#f0f0f0', relief='groove', borderwidth=2)
+frame_left = tk.Frame(frame_main, bg='#f0f0f0', relief='groove', borderwidth=2)
 frame_left.grid(row=0, column=0, padx=10, pady=10, sticky="nsew")
 
 # Title
-title_label = Label(frame_left, text="AIRAC Data Converter", font=('Arial', 14, 'bold'), bg='#f0f0f0', fg='#2c3e50')
-title_label.grid(row=0, column=0, columnspan=3, pady=(15,20), sticky='ew')
+title_label = tk.Label(frame_left, text="AIRAC Data Converter", font=('Arial', 14, 'bold'), bg='#f0f0f0', fg='#2c3e50')
+title_label.grid(row=0, column=0, columnspan=3, pady=(10,20), sticky='ew')
 
 # File selection section
-file_frame = Frame(frame_left, bg='#f0f0f0')
-file_frame.grid(row=1, column=0, columnspan=3, sticky='ew', padx=15)
+file_frame = tk.Frame(frame_left, bg='#f0f0f0')
+file_frame.grid(row=1, column=0, columnspan=3, sticky='ew', padx=10)
 
-Label(file_frame, text="AIRAC File (.pc):", bg='#f0f0f0', fg='#2c3e50', font=('Arial', 10)).grid(row=0, column=0, sticky='w')
-Entry(file_frame, textvariable=airac_file_path, width=50, bg='white', relief='solid').grid(row=0, column=1, padx=5)
-Button(file_frame, text="Browse", command=browse_airac_file, relief='groove', bg='#3498db', fg='white', padx=10).grid(row=0, column=2)
+tk.Label(file_frame, text="AIRAC File (.pc):", bg='#f0f0f0', fg='#2c3e50', font=('Arial', 10)).grid(row=0, column=0, sticky='w')
+tk.Entry(file_frame, textvariable=airac_file_path, width=50, bg='white', relief='solid').grid(row=0, column=1, padx=5)
+tk.Button(file_frame, text="Browse", command=browse_airac_file, relief='groove', bg='#3498db', fg='white', padx=10).grid(row=0, column=2)
 
 # AIRAC Cycle display
-airac_cycle_label = Label(file_frame, text="AIRAC Cycle: ", font=('Arial', 10, 'bold'), bg='#f0f0f0', fg='#2c3e50')
-airac_cycle_label.grid(row=1, column=0, columnspan=3, sticky='w', pady=15)
+airac_cycle_label = tk.Label(file_frame, text="AIRAC Cycle: ", font=('Arial', 10, 'bold'), bg='#f0f0f0', fg='#e74c3c')
+airac_cycle_label.grid(row=1, column=0, columnspan=3, sticky='w', pady=(10,5))
 
-Label(file_frame, text="Airport List (.txt):", bg='#f0f0f0', fg='#2c3e50', font=('Arial', 10)).grid(row=2, column=0, sticky='w')
-Entry(file_frame, textvariable=airport_file_path, width=50, bg='white', relief='solid').grid(row=2, column=1, padx=5)
-Button(file_frame, text="Browse", command=browse_airport_file, relief='groove', bg='#3498db', fg='white', padx=10).grid(row=2, column=2)
+tk.Label(file_frame, text="Airport List (.txt):", bg='#f0f0f0', fg='#2c3e50', font=('Arial', 10)).grid(row=2, column=0, sticky='w')
+tk.Entry(file_frame, textvariable=airport_file_path, width=50, bg='white', relief='solid').grid(row=2, column=1, padx=5)
+tk.Button(file_frame, text="Browse", command=browse_airport_file, relief='groove', bg='#3498db', fg='white', padx=10).grid(row=2, column=2)
 
 # Airport List display section
-airport_frame = Frame(frame_left, bg='#f0f0f0')
-airport_frame.grid(row=2, column=0, columnspan=3, sticky='ew', padx=15, pady=20)
+airport_frame = tk.Frame(frame_left, bg='#f0f0f0')
+airport_frame.grid(row=2, column=0, columnspan=3, sticky='ew', padx=10, pady=10)
 
-Label(airport_frame, text="Selected Airports:", font=('Arial', 10, 'bold'), bg='#f0f0f0', fg='#2c3e50').grid(row=0, column=0, columnspan=3, sticky='w', pady=(0,10))
-airport_list_text = Text(airport_frame, height=5, width=49, font=('Courier', 10), bg='white', relief='solid')
-airport_list_text.grid(row=1, column=0, columnspan=3, sticky='ew')
-airport_frame.grid_columnconfigure(0, weight=1)
+tk.Label(airport_frame, text="Selected Airports:", font=('Arial', 10, 'bold'), bg='#f0f0f0', fg='#2c3e50').pack(anchor='center')
+airport_list_text = tk.Text(airport_frame, height=5, width=49, font=('Courier', 10), bg='white', relief='solid')
+airport_list_text.pack(expand=True, pady=(5,5))
 
 # Options and Buttons section
-options_frame = Frame(frame_left, bg='#f0f0f0')
-options_frame.grid(row=3, column=0, columnspan=3, sticky='ew', padx=15, pady=(0,15))
+options_frame = tk.Frame(frame_left, bg='#f0f0f0')
+options_frame.grid(row=3, column=0, columnspan=3, sticky='ew', padx=10, pady=10)
 
-# Frame for checkbox (left-aligned)
-checkbox_frame = Frame(options_frame, bg='#f0f0f0')
-checkbox_frame.grid(row=0, column=0, sticky='w', pady=10)
-Checkbutton(checkbox_frame, text="ATIS 8.33kHz -> 25kHz Conversion", variable=atis_var, bg='#f0f0f0', fg='#2c3e50', selectcolor='#3498db').pack(side=LEFT)
+# Create a sub-frame for the checkbox to center it
+checkbox_frame = tk.Frame(options_frame, bg='#f0f0f0')
+checkbox_frame.pack(fill='x', pady=5)
+tk.Checkbutton(checkbox_frame, text="ATIS 8.33kHz -> 25kHz Conversion", variable=atis_var, bg='#f0f0f0', fg='#2c3e50', selectcolor='#3498db').pack(expand=True)
 
-# Frame for buttons (right-aligned)
-button_frame = Frame(options_frame, bg='#f0f0f0')
-button_frame.grid(row=1, column=0, sticky='e', pady=5)
-Button(button_frame, text="Compile", command=compile_files, relief='groove', bg='#2ecc71', fg='white', width=15, height=1, font=('Arial', 10, 'bold')).pack(side=LEFT, padx=5)
-Button(button_frame, text="Exit", command=root.destroy, relief='groove', bg='#e74c3c', fg='white', width=15, height=1, font=('Arial', 10, 'bold')).pack(side=LEFT, padx=5)
+# Create a sub-frame for buttons and align them to the right
+button_frame = tk.Frame(options_frame, bg='#f0f0f0')
+button_frame.pack(fill='x', pady=10)
+button_frame.grid_columnconfigure(0, weight=1)  # This will push buttons to the right
 
-options_frame.grid_columnconfigure(0, weight=1)
+tk.Button(button_frame, text="Compile", command=compile_files, relief='groove', bg='#2ecc71', fg='white', width=15, height=1, font=('Arial', 10, 'bold')).grid(row=0, column=1, padx=5)
+tk.Button(button_frame, text="Exit", command=root.destroy, relief='groove', bg='#e74c3c', fg='white', width=15, height=1, font=('Arial', 10, 'bold')).grid(row=0, column=2, padx=5)
 
 # Right frame for logs
-frame_right = Frame(frame_main, bg='#f0f0f0', relief='groove', borderwidth=2)
+frame_right = tk.Frame(frame_main, bg='#f0f0f0', relief='groove', borderwidth=2)
 frame_right.grid(row=0, column=1, padx=10, pady=10, sticky="nsew")
 
-Label(frame_right, text="Compilation Log", font=('Arial', 12, 'bold'), bg='#f0f0f0', fg='#2c3e50').pack(anchor='w', padx=10, pady=10)
-log_text = Text(frame_right, height=20, width=80, font=('Consolas', 9), bg='white', relief='solid')
+tk.Label(frame_right, text="Compilation Log", font=('Arial', 12, 'bold'), bg='#f0f0f0', fg='#2c3e50').pack(anchor='w', padx=10, pady=10)
+log_text = tk.Text(frame_right, height=20, width=80, font=('Consolas', 9), bg='white', relief='solid')
 log_text.pack(fill='both', expand=True, padx=10, pady=(0,10))
 
 # Adjust frames to expand when the window is resized
