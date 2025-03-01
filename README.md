@@ -32,6 +32,17 @@ This Python script converts the ARINC 424 world file (assuming it follows the sc
   
 ## Changelog
 
+Version 1.9 (March 1st 2025)
+ - GUI remade cleaner and prettier
+
+Version 1.8.1 (March 1st 2025)
+ - Footer (EDDF RWY36) is only applied if EDDF is part the airport list
+ - AIRAC cycle is defined using the file header instead of filename and displayed on GUI
+ - Airport list is displayed on GUI as soon as selected
+
+Version 1.8 (October 21th 2024)
+ - UI : Swich from PySimpleGUI to tkinter to avoid library use
+
 Version 1.7 (May 29th 2024)
  - UI modification : 3 columns to 2 columns.
  - Previously using "FolderBrowser", now using "FileBrowser".
